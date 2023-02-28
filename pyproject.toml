@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "script-boilerplate"
+version = "0.1.0"
+description = ""
+authors = ["jorre housen <jhousen.dev@gmail.com>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+click = "^8.1.3"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.2.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+main = "src.example.main:main"
