@@ -1,8 +1,9 @@
-from faker import Faker
 import pytest
+from faker import Faker
 
 fake = Faker()
 Faker.seed(1369)
+
 
 @pytest.fixture(name="fake")
 def fixture_fake():

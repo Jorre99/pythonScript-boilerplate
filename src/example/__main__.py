@@ -1,5 +1,7 @@
 import os
+
 import click
+
 
 def config_logging():
     return
@@ -21,8 +23,7 @@ def main(env: str, debug: bool):
     os.environ["ENV"] = env
     os.environ["DEBUG"] = str(debug)
     print(f"hello world {env}, {debug}")
-    
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
-
