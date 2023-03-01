@@ -20,7 +20,11 @@ lint-flake: ## checks src and tests with mypy
 	$(CMD) flakeheaven lint $(SRC_DIR) $(TESTS_DIR)
 .PHONY: lint-flake
 
-lint: lint-black lint-flake ## runs all static analysis tools
+lint-mypy: ## checks type annotation
+	$(CMD) mypy $(SRC_DIR) $(TESTS_DIR)
+.PHONY: lint-mypy
+
+lint: lint-black lint-flake lint-mypy ## runs all static analysis tools
 .PHONY: lint
 
 test: ## runs tests
