@@ -16,14 +16,21 @@ lint-black: ## checks src and tests with mypy
 	$(CMD) black --check --fast $(SRC_DIR) $(TESTS_DIR)
 .PHONY: lint-black
 
-lint: lint-black ## runs all static analysis tools
+lint-flake: ## checks src and tests with mypy
+	$(CMD) flakeheaven lint $(SRC_DIR) $(TESTS_DIR)
+.PHONY: lint-flake
+
+lint: lint-black lint-flake ## runs all static analysis tools
 .PHONY: lint
 
 test: ## runs tests
 	$(CMD) pytest --cov=src --cov-report term --cov-report html:tests/.coverage $(TESTS_DIR)
 .PHONY: test
 
-qa: lint test ## for CI/CD. Runs all code quality tools
+safety: ## tests third part packages against a database of known compromised ones
+	poetry export --with dev --format=requirements.txt --without-hashes | poetry run safety check --stdin
+
+qa: safety lint test ## for CI/CD. Runs all code quality tools
 .PHONY: qa
 
 qa-local: format qa ## for local development (before checking in). Formats code and runs qa
